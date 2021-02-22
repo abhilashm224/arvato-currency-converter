@@ -1,20 +1,22 @@
 import React, { useEffect, useContext } from 'react'
-import { ReducerContext } from '../Context'
-import CurrencyList from '../components/CurrencyList/CurrencyList'
+
+import { ReducerContext } from '../../Context'
+import LatestRates from '../../components/LatestRates/LatestRates'
+import './CurrentRates.scss'
 
 const CurrentRates = () => {
-  const { getAllCurrencies, state } = useContext(ReducerContext)
+  const { getLatestRates, state } = useContext(ReducerContext)
 
   useEffect(() => {
-    getAllCurrencies()
+    getLatestRates()
   }, [])
 
   return (
-    state.allCurrencies.cata({
+    state.latestRates.cata({
       NotAsked: () => '',
       Loading: () => 'Loading....',
       Failure: err => <div>Failed to fetch currency and exchange rates info ({err})</div>,
-      Success: (data) => <CurrencyList data={data.rates} />
+      Success: (data) => <LatestRates data={data.rates} />
     })
   )
 }

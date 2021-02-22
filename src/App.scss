@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/bootstrap";
+
+.App {
+  text-align: center;
+}
+
+.Wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.Content {
+  flex: 3;
+  background-color: #f1f1f1;
+  padding: 10px;
+}

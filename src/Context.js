@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import PropTypes from 'prop-types'
 import daggy from 'daggy'
 
-import { fetchConvertedAmount, fetchAllCurrencies } from './api'
+import { fetchCurrencyRate, fetchLatestRates, fetchAllCurrencies } from './api'
 import RemoteData from './api/remoteData'
 
 const Actions = daggy.taggedSum('Actions', {
@@ -15,8 +15,9 @@ const reducer = (state, action) => action.cata({
 
 //Setting initial state for the application
 const initialState = {
-  convertAmountInfo: RemoteData.NotAsked,
-  allCurrencies: RemoteData.NotAsked
+  convertCurrencyInfo: RemoteData.NotAsked,
+  latestRates: RemoteData.NotAsked,
+  currencyList: RemoteData.NotAsked
 }
 
 const ReducerContext = React.createContext(initialState)
@@ -24,21 +25,27 @@ const ReducerContext = React.createContext(initialState)
 function ReducerProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const findConvertedAmount = () => {
-    dispatch(Actions.HttpRequest({ convertAmountInfo: RemoteData.Loading }))
-    fetchConvertedAmount().then(res =>
-      dispatch(Actions.HttpRequest({ convertAmountInfo: res })))
+  const getCurrencyRate = (data) => {
+    dispatch(Actions.HttpRequest({ convertCurrencyInfo: RemoteData.Loading }))
+    fetchCurrencyRate(data).then(res =>
+      dispatch(Actions.HttpRequest({ convertCurrencyInfo: res })))
+  }
+
+  const getLatestRates = (data) => {
+    dispatch(Actions.HttpRequest({ latestRates: RemoteData.Loading }))
+    fetchLatestRates(data).then(res =>
+      dispatch(Actions.HttpRequest({ latestRates: res })))
   }
 
   const getAllCurrencies = () => {
-    dispatch(Actions.HttpRequest({ allCurrencies: RemoteData.Loading }))
+    dispatch(Actions.HttpRequest({ currencyList: RemoteData.Loading }))
     fetchAllCurrencies().then(res =>
-      dispatch(Actions.HttpRequest({ allCurrencies: res })))
+      dispatch(Actions.HttpRequest({ currencyList: res })))
   }
 
   return (
     <ReducerContext.Provider value={{
-      state, dispatch, findConvertedAmount, getAllCurrencies
+      state, dispatch, getCurrencyRate, getLatestRates, getAllCurrencies
     }}
     >
       {children}

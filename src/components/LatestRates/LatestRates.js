@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const CurrencyList = ({ data }) => {
+const LatestRates = ({ data }) => {
   return (
     <table>
+      <tbody>
       <tr>
         <th>Currency</th>
         <th>Exchange Rates</th>
@@ -14,12 +15,13 @@ const CurrencyList = ({ data }) => {
           <td>{data[key]}</td>
         </tr>
       )}
+      </tbody>
     </table>
   )
 }
 
-CurrencyList.propTypes = {
+LatestRates.propTypes = {
   data: PropTypes.object.isRequired
 }
 
-export default CurrencyList
+export default LatestRates

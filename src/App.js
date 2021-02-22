@@ -9,9 +9,9 @@ import { ReducerProvider } from './Context'
 import Header from './components/Header/Header'
 import Nav from './components/Nav/Nav'
 import ConvertAmount from './pages/ConvertAmount'
-import CurrentRates from './pages/CurrentRates'
+import CurrentRates from './pages/CurrentRates/CurrentRates'
 import SearchHistory from './pages/SearchHistory'
-import './App.css'
+import './App.scss'
 
 
 const AppRouter = () => {
@@ -31,8 +31,12 @@ function App() {
     <div className='App'>
       <ReducerProvider>
         <Header />
-        <Nav />
-        <AppRouter />
+        <section className='Wrapper'>
+          <Nav />
+          <section className='Content'>
+            <AppRouter />
+          </section>
+        </section>
       </ReducerProvider>
     </div>
   )
