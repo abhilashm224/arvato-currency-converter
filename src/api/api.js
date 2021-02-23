@@ -2,13 +2,19 @@ import axios from 'axios'
 import resolve from './resolve'
 import { apiKey } from '../constants/Constants'
 
-//api to get converted amount
-const fetchCurrencyRate = async (data) => {
-  let queryParamData = `access_key=${apiKey}`
-  Object.keys(data).map(key => queryParamData += `&${key}=${data[key]}`)
+//api to get converted rates
+const fetchCurrencyRates = async (symbols) => {
+  const queryParamData = `access_key=${apiKey}&symbols=${symbols}`
 
   return await resolve(
     axios(`${process.env.REACT_APP_API_URL}/latest?${queryParamData}`)
+  )
+}
+//api to get historical converted rates
+const fetchHistoricalRates = async (date, symbols) => {
+  const queryParamData = `access_key=${apiKey}&symbols=${symbols}`
+  return await resolve(
+    axios(`${process.env.REACT_APP_API_URL}/${date}?${queryParamData}`)
   )
 }
 
@@ -23,4 +29,4 @@ const fetchAllCurrencies = async () =>
     axios(`${process.env.REACT_APP_API_URL}/symbols?access_key=${apiKey}`)
   )
 
-export { fetchCurrencyRate, fetchLatestRates, fetchAllCurrencies }
+export { fetchCurrencyRates, fetchLatestRates, fetchAllCurrencies, fetchHistoricalRates }

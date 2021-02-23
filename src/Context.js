@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import PropTypes from 'prop-types'
 import daggy from 'daggy'
 
-import { fetchCurrencyRate, fetchLatestRates, fetchAllCurrencies } from './api'
+import { fetchCurrencyRates, fetchLatestRates, fetchAllCurrencies, fetchHistoricalRates } from './api'
 import RemoteData from './api/remoteData'
 
 const Actions = daggy.taggedSum('Actions', {
@@ -15,7 +15,7 @@ const reducer = (state, action) => action.cata({
 
 //Setting initial state for the application
 const initialState = {
-  convertCurrencyInfo: RemoteData.NotAsked,
+  currencyRates: RemoteData.NotAsked,
   latestRates: RemoteData.NotAsked,
   currencyList: RemoteData.NotAsked
 }
@@ -25,12 +25,16 @@ const ReducerContext = React.createContext(initialState)
 function ReducerProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const getCurrencyRate = (data) => {
-    dispatch(Actions.HttpRequest({ convertCurrencyInfo: RemoteData.Loading }))
-    fetchCurrencyRate(data).then(res =>
-      dispatch(Actions.HttpRequest({ convertCurrencyInfo: res })))
+  const getCurrencyRates = (data) => {
+    dispatch(Actions.HttpRequest({ currencyRates: RemoteData.Loading }))
+    fetchCurrencyRates(data).then(res =>
+      dispatch(Actions.HttpRequest({ currencyRates: res })))
   }
-
+  const getHistoricalRates = (data) => {
+    dispatch(Actions.HttpRequest({ currencyRates: RemoteData.Loading }))
+    fetchHistoricalRates(data).then(res =>
+      dispatch(Actions.HttpRequest({ currencyRates: res })))
+  }
   const getLatestRates = (data) => {
     dispatch(Actions.HttpRequest({ latestRates: RemoteData.Loading }))
     fetchLatestRates(data).then(res =>
@@ -45,7 +49,7 @@ function ReducerProvider({ children }) {
 
   return (
     <ReducerContext.Provider value={{
-      state, dispatch, getCurrencyRate, getLatestRates, getAllCurrencies
+      state, dispatch, getCurrencyRates, getLatestRates, getAllCurrencies,getHistoricalRates
     }}
     >
       {children}

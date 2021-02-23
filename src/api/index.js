@@ -1,13 +1,15 @@
 import RemoteData from './remoteData'
 import {
-  fetchCurrencyRate,
+  fetchCurrencyRates,
   fetchLatestRates,
-  fetchAllCurrencies
+  fetchAllCurrencies,
+  fetchHistoricalRates
 } from './api'
 
 export {
-  fetchCurrencyRate,
+  fetchCurrencyRates,
   fetchLatestRates,
   fetchAllCurrencies,
+  fetchHistoricalRates,
   RemoteData
 }

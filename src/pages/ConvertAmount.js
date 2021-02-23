@@ -1,20 +1,28 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import moment from 'moment'
 
 import ConvertForm from '../components/ConvertForm/ConvertForm'
+import ConvertedAmount from '../compo'
 import { ReducerContext } from '../Context'
 
 const ConvertAmount = () => {
-  const { getAllCurrencies, getCurrencyRate, state } = useContext(ReducerContext)
+  const { getHistoricalRates, getCurrencyRates, getAllCurrencies, state } = useContext(ReducerContext)
+  const [amount, setAmount] = useState('')
+
   const submitForm = (formData) => {
-    const data = {
-      base: formData.fromCurrency,
-      symbols: formData.toCurrency
+    setAmount(formData.amount)
+    const currencySymbols = `${formData.fromCurrency}, ${formData.toCurrency}`
+    if (formData.date) {
+      const date = moment(formData.date).format('YYYY-MM-DD')
+      getHistoricalRates(date, currencySymbols)
+    } else {
+      getCurrencyRates(currencySymbols)
     }
-    getCurrencyRate(data)
   }
+
   useEffect(() => {
     getAllCurrencies()
-  }, [])
+  })
 
   return (
     <>
@@ -22,16 +30,10 @@ const ConvertAmount = () => {
         NotAsked: () => '',
         Loading: () => 'Loading....',
         Failure: err => <div>Failed to fetch currency list ({err})</div>,
-        Success: (data) => <ConvertForm currencyList={data.symbols} formSubmitCallback={submitForm} />
-      })}
-
-      {state.convertCurrencyInfo.cata({
-        NotAsked: () => '',
-        Loading: () => 'Loading....',
-        Failure: err => <div>Failed to fetch currency rate ({err})</div>,
-        Success: (data) => {
-          return <div>{data}</div>
-        }
+        Success: (data) => <>
+          <ConvertForm currencyList={data.symbols} formSubmitCallback={submitForm} />
+          <ConvertedTAmount amountInput={amount} />
+        </>
       })}
     </>
   )
