@@ -22,7 +22,7 @@ const ConvertAmount = () => {
 
   useEffect(() => {
     getAllCurrencies()
-  })
+  },[])
 
   return (
     <>
