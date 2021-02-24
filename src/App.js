@@ -7,10 +7,10 @@ import {
 
 import { ReducerProvider } from './Context'
 import Header from './components/Header/Header'
-import Nav from './components/Nav/Nav'
+import SideMenu from './components/Nav/Nav'
 import ConvertAmount from './pages/ConvertAmount'
 import CurrentRates from './pages/CurrentRates/CurrentRates'
-import SearchHistory from './pages/SearchHistory'
+import SearchHistory from './pages/SearchHistory/SearchHistory'
 import './App.scss'
 
 
@@ -32,9 +32,9 @@ function App() {
       <ReducerProvider>
         <Header />
         <section className='Wrapper'>
-          <Nav />
+          <SideMenu />
           <section className='Content'>
-            <AppRouter />
+           
           </section>
         </section>
       </ReducerProvider>

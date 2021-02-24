@@ -1,14 +1,16 @@
 import React, { useContext } from 'react'
 import { ReducerContext } from '../../Context'
 
-const ConvertedAmount = ({ amountInput }) => {
-  const { state } = useContext(ReducerContext)
+const ConvertedAmount = ({ formData }) => {
+  const { storeHistory, state } = useContext(ReducerContext)
+
   return (state.currencyRates.cata({
     NotAsked: () => '',
     Loading: () => 'Loading....',
     Failure: err => <div>Failed to fetch currency rate ({err})</div>,
     Success: (data) => {
-      return <div>{calculateAmount(data.rates, amountInput)}</div>
+		storeHistory(formData)
+      return <div>{calculateAmount(data.rates, formData)}</div>
     }
   }))
 }
@@ -17,11 +19,12 @@ const ConvertedAmount = ({ amountInput }) => {
 So dividing user entered amount by from currency exchange rate.
 Then multiplying with to currency exchange rate*/
 
-function calculateAmount(rates, amount) {
-  const fromCurrencyExchangeRate = rates[0]
-  const toCurrencyExchangeRate = rates[1]
-  const newAmount = amount/fromCurrencyExchangeRate
-  return newAmount * toCurrencyExchangeRate
+function calculateAmount(rates, formData) {
+  const fromCurrencyExchangeRate = rates[formData.fromCurrency]
+  const toCurrencyExchangeRate = rates[formData.toCurrency]
+  const newAmount = +formData.amount/fromCurrencyExchangeRate
+  
+  return (newAmount * toCurrencyExchangeRate).toFixed(2)
 }
 
 export default ConvertedAmount

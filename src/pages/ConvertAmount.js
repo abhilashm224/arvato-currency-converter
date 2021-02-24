@@ -2,15 +2,15 @@ import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
 
 import ConvertForm from '../components/ConvertForm/ConvertForm'
-import ConvertedAmount from '../compo'
+import ConvertedAmount from '../components/ConvertedAmout/ConvertedAmount'
 import { ReducerContext } from '../Context'
 
 const ConvertAmount = () => {
   const { getHistoricalRates, getCurrencyRates, getAllCurrencies, state } = useContext(ReducerContext)
-  const [amount, setAmount] = useState('')
+  const [formData, setFormData] = useState()
 
   const submitForm = (formData) => {
-    setAmount(formData.amount)
+    setFormData(formData)
     const currencySymbols = `${formData.fromCurrency}, ${formData.toCurrency}`
     if (formData.date) {
       const date = moment(formData.date).format('YYYY-MM-DD')
@@ -22,7 +22,7 @@ const ConvertAmount = () => {
 
   useEffect(() => {
     getAllCurrencies()
-  })
+  }, [])
 
   return (
     <>
@@ -30,10 +30,12 @@ const ConvertAmount = () => {
         NotAsked: () => '',
         Loading: () => 'Loading....',
         Failure: err => <div>Failed to fetch currency list ({err})</div>,
-        Success: (data) => <>
+        Success: (data) => (
+		<>
           <ConvertForm currencyList={data.symbols} formSubmitCallback={submitForm} />
-          <ConvertedTAmount amountInput={amount} />
+          <ConvertedAmount formData={formData} />
         </>
+		)
       })}
     </>
   )

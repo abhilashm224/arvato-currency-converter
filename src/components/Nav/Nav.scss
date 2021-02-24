@@ -1,10 +1,15 @@
-nav {
-  flex: 1;
-  background: #ccc;
+.navWrapper {
   padding: 0.5rem;
+  width: 100%;
 
   ul {
     list-style: none;
-    text-align: left;
+    padding: 0; 
+    display: flex;
+    justify-content: center;
+	
+	li {
+	padding: 0 2rem;
+	}
   }
 }

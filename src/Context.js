@@ -17,7 +17,8 @@ const reducer = (state, action) => action.cata({
 const initialState = {
   currencyRates: RemoteData.NotAsked,
   latestRates: RemoteData.NotAsked,
-  currencyList: RemoteData.NotAsked
+  currencyList: RemoteData.NotAsked,
+  searchHistory: []
 }
 
 const ReducerContext = React.createContext(initialState)
@@ -30,9 +31,9 @@ function ReducerProvider({ children }) {
     fetchCurrencyRates(data).then(res =>
       dispatch(Actions.HttpRequest({ currencyRates: res })))
   }
-  const getHistoricalRates = (data) => {
+  const getHistoricalRates = (date, symbols) => {
     dispatch(Actions.HttpRequest({ currencyRates: RemoteData.Loading }))
-    fetchHistoricalRates(data).then(res =>
+    fetchHistoricalRates(date, symbols).then(res =>
       dispatch(Actions.HttpRequest({ currencyRates: res })))
   }
   const getLatestRates = (data) => {
@@ -47,9 +48,16 @@ function ReducerProvider({ children }) {
       dispatch(Actions.HttpRequest({ currencyList: res })))
   }
 
+  const storeHistory = (data)=>{
+	if(data){
+		state.searchHistory.push(data)
+	}
+	return false
+}
+
   return (
     <ReducerContext.Provider value={{
-      state, dispatch, getCurrencyRates, getLatestRates, getAllCurrencies,getHistoricalRates
+      state, dispatch, getCurrencyRates, getLatestRates, getAllCurrencies,getHistoricalRates, storeHistory
     }}
     >
       {children}
