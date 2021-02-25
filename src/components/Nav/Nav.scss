@@ -4,12 +4,32 @@
 
   ul {
     list-style: none;
-    padding: 0; 
+    padding: 0;
     display: flex;
     justify-content: center;
-	
-	li {
-	padding: 0 2rem;
-	}
+
+
+    .link {
+      margin: 1rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: #181818;
+      border-bottom: 3px solid transparent;
+    }
+
+    .link:hover {
+      transform: translateY(-2px);
+    }
+
+    .linkActive {
+      border-bottom: 3px solid red;
+      transition: border-bottom .5s ease-in-out;
+    }
+
+  }
+
+  .contentWrapper {
+    padding: 1rem 0.5rem;
   }
 }

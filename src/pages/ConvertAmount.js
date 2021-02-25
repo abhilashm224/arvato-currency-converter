@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
-
 import ConvertForm from '../components/ConvertForm/ConvertForm'
 import ConvertedAmount from '../components/ConvertedAmout/ConvertedAmount'
 import { ReducerContext } from '../Context'
@@ -25,7 +24,6 @@ const ConvertAmount = () => {
   }, [])
 
 
-
   return (
     <>
       {state.currencyList.cata({
@@ -33,11 +31,11 @@ const ConvertAmount = () => {
         Loading: () => 'Loading....',
         Failure: err => <div>Failed to fetch currency list ({err})</div>,
         Success: (data) => (
-		<>
-          <ConvertForm currencyList={data.symbols} formSubmitCallback={submitForm} />
-          <ConvertedAmount formData={formData} />
-        </>
-		)
+          <>
+            <ConvertForm currencyList={data.symbols} formSubmitCallback={submitForm} />
+            <ConvertedAmount formData={formData} />
+          </>
+        )
       })}
     </>
   )

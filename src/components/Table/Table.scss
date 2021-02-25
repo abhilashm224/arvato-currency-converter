@@ -1,0 +1,19 @@
+table {
+  tbody {
+    display: block;
+    max-height: 30rem;
+    overflow-y: scroll;
+
+    tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+  }
+
+  thead {
+    display: table;
+    width: 98.7%;
+    table-layout: fixed;
+  }
+}

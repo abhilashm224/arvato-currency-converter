@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+  Link, NavLink,
   Redirect
 } from 'react-router-dom'
 
@@ -13,36 +13,48 @@ import SearchHistory from '../../pages/SearchHistory/SearchHistory'
 import './Nav.scss'
 
 const SideMenu = () => {
-	
+
   return (
     <Router>
-      <div className="navWrapper">
+      <div className='navWrapper'>
         <ul>
           <li>
-            <Link to="/">Convert</Link>
+            <NavLink
+              exact
+              to='/'
+              activeClassName='linkActive'
+              className='link'>Convert</NavLink>
           </li>
           <li>
-            <Link to="/current-rates">Current Rates</Link>
+            <NavLink
+              to='/current-rates'
+              activeClassName='linkActive'
+              className='link'>Current Rates</NavLink>
           </li>
-		  <li>
-            <Link to="/search-history">Search History</Link>
+          <li>
+            <NavLink
+              to='/search-history'
+              activeClassName='linkActive'
+              className='link'>Search History</NavLink>
           </li>
         </ul>
 
-         <Switch>
-          <Route exact path="/">
-            <ConvertAmount />
-          </Route>
-          <Route path="/current-rates">
-          <CurrentRates />
-          </Route>
-          <Route path="/search-history">
-           <SearchHistory />
-          </Route>
-		  <Route path="*">
-            <Redirect to="/" />
-          </Route>
-        </Switch>
+        <div className='contentWrapper'>
+          <Switch>
+            <Route exact path='/'>
+              <ConvertAmount />
+            </Route>
+            <Route path='/current-rates'>
+              <CurrentRates />
+            </Route>
+            <Route path='/search-history'>
+              <SearchHistory />
+            </Route>
+            <Route path='*'>
+              <Redirect to='/' />
+            </Route>
+          </Switch>
+        </div>
       </div>
     </Router>
   )
