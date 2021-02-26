@@ -3,16 +3,16 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link, NavLink,
+  NavLink,
   Redirect
 } from 'react-router-dom'
 
-import ConvertAmount from '../../pages/ConvertAmount'
+import ConvertAmount from '../../pages/ConvertAmount/ConvertAmount'
 import CurrentRates from '../../pages/CurrentRates/CurrentRates'
 import SearchHistory from '../../pages/SearchHistory/SearchHistory'
 import './Nav.scss'
 
-const SideMenu = () => {
+const Nav = () => {
 
   return (
     <Router>
@@ -61,4 +61,4 @@ const SideMenu = () => {
 }
 
 
-export default SideMenu
+export default Nav

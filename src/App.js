@@ -1,7 +1,7 @@
 import React from 'react'
 import { ReducerProvider } from './Context'
 import Header from './components/Header/Header'
-import SideMenu from './components/Nav/Nav'
+import Nav from './components/Nav/Nav'
 import './App.scss'
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <ReducerProvider>
         <Header />
         <section className='Wrapper'>
-          <SideMenu />
+          <Nav />
         </section>
       </ReducerProvider>
     </div>

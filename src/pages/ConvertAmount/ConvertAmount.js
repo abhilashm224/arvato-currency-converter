@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment'
-import ConvertForm from '../components/ConvertForm/ConvertForm'
-import ConvertedAmount from '../components/ConvertedAmout/ConvertedAmount'
-import { ReducerContext } from '../Context'
+import ConvertForm from '../../components/ConvertForm/ConvertForm'
+import ConvertResult from '../../components/ConvertResult/ConvertResult'
+import { ReducerContext } from '../../Context'
 
 const ConvertAmount = () => {
   const { getHistoricalRates, getCurrencyRates, getAllCurrencies, state } = useContext(ReducerContext)
@@ -33,7 +33,7 @@ const ConvertAmount = () => {
         Success: (data) => (
           <>
             <ConvertForm currencyList={data.symbols} formSubmitCallback={submitForm} />
-            <ConvertedAmount formData={formData} />
+            <ConvertResult formData={formData} />
           </>
         )
       })}

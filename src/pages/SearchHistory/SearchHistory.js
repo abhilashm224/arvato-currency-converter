@@ -7,7 +7,7 @@ const SearchHistory = () => {
   const { state } = useContext(ReducerContext)
 
   return (
-    state.searchHistory.length > 0 ? <Table data={state.searchHistory} /> :
+    (state.searchHistory.length > 0) ? <Table data={state.searchHistory} /> :
       <div className='noHistory'>No search history found</div>
   )
 }

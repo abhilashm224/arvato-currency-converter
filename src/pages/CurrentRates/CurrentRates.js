@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import { ReducerContext } from '../../Context'
 import Table from '../../components/Table/Table'
-import './CurrentRates.scss'
 
 const CurrentRates = () => {
   const { getLatestRates, state } = useContext(ReducerContext)
@@ -17,7 +16,10 @@ const CurrentRates = () => {
       Failure: err => <div>Failed to fetch currency and exchange rates info ({err})</div>,
       Success: (data) => {
         const tableData = getTableData(data.rates)
-        return <Table data={tableData} />
+        return <>
+          <p>Base currency : Euro(€)</p>
+          <Table data={tableData} />
+        </>
 
       }
     })

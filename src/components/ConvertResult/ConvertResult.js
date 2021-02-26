@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { ReducerContext } from '../../Context'
-import './ConvertedAmount.scss'
+import './ConvertResult.scss'
 
-const ConvertedAmount = ({ formData }) => {
+const ConvertResult = ({ formData }) => {
   const { storeSearchHistory, state } = useContext(ReducerContext)
 
   return (state.currencyRates.cata({
@@ -23,6 +24,10 @@ const ConvertedAmount = ({ formData }) => {
   }))
 }
 
+ConvertResult.propTypes = {
+  formData: PropTypes.object.isRequired
+}
+
 /*
 Exchange rates delivered by the Fixer API are by default relative to EUR.
 So dividing user entered amount by from currency exchange rate.
@@ -39,4 +44,4 @@ function calculateAmount(rates, formData) {
   }
 }
 
-export default ConvertedAmount
+export default ConvertResult

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Table as BootstrapTable } from 'react-bootstrap'
 import './Table.scss'
 
-//common table component
+//reusable table component
 const Table = ({ data }) => (
   <BootstrapTable striped bordered>
     <thead>
