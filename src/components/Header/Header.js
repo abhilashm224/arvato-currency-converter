@@ -4,7 +4,7 @@ import './Header.scss'
 //header component
 const Header = () => (
   <div className='header'>
-    <h1>Currency Converter</h1>
+    <h1 data-testid="currency-converter-header">Currency Converter</h1>
   </div>
 )
 

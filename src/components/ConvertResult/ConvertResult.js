@@ -25,7 +25,7 @@ const ConvertResult = ({ formData }) => {
 }
 
 ConvertResult.propTypes = {
-  formData: PropTypes.object.isRequired
+  formData: PropTypes.object
 }
 
 /*
